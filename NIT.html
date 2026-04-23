@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>✨ Skill Stack · Multilingual Learning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #f9f1e0;
+            --bg-secondary: #f5e9d8;
+            --sidebar-bg: rgba(255, 248, 235, 0.95);
+            --card-bg: rgba(255, 255, 250, 0.9);
+            --text-primary: #2e2b2a;
+            --text-secondary: #4a3f2e;
+            --accent-orange: #ffb347;
+            --accent-dark: #b45f2b;
+            --border-light: #fff2db;
+            --nav-hover: #ffe3b7;
+            --nav-active: #ffd19b;
+            --progress-bg: #e7cfb0;
+            --success: #10b981;
+            --danger: #ef4444;
+            --info: #3b82f6;
+        }
+
+        body.theme-dark {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --sidebar-bg: rgba(26, 26, 46, 0.95);
+            --card-bg: rgba(30, 30, 50, 0.9);
+            --text-primary: #e4e4e4;
+            --text-secondary: #b8b8d0;
+            --accent-orange: #ff6b6b;
+            --accent-dark: #c44569;
+            --border-light: #2a2a4a;
+            --nav-hover: #2d2d5e;
+            --nav-active: #3d3d7a;
+            --progress-bg: #2a2a4a;
+        }
+
+        body.theme-dim {
+            --bg-primary: #2c3e50;
+            --bg-secondary: #34495e;
+            --sidebar-bg: rgba(44, 62, 80, 0.95);
+            --card-bg: rgba(52, 73, 94, 0.9);
+            --text-primary: #ecf0f1;
+            --text-secondary: #bdc3c7;
+            --accent-orange: #e67e22;
+            --accent-dark: #d35400;
+            --border-light: #3d566e;
+            --nav-hover: #3d566e;
+            --nav-active: #4a6a85;
+            --progress-bg: #3d566e;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(145deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            min-height: 100vh;
+            color: var(--text-primary);
+        }
+
+        .app-wrapper { display: flex; min-height: 100vh; }
+
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar-bg);
+            backdrop-filter: blur(12px);
+            border-right: 2px solid var(--border-light);
+            padding: 24px 12px;
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            padding-left: 8px;
+        }
+        .logo-icon { font-size: 34px; color: var(--accent-orange); }
+        .logo-text {
+            font-weight: 800;
+            font-size: 24px;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            margin: 4px 0;
+            border-radius: 16px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-size: 15px;
+        }
+        .nav-item i { font-size: 20px; width: 26px; color: var(--accent-dark); }
+        .nav-item:hover { background: var(--nav-hover); transform: translateX(6px); }
+        .nav-item.active { background: var(--nav-active); box-shadow: 0 4px 0 var(--accent-dark); }
+
+        .theme-section, .language-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid var(--border-light);
+        }
+        .theme-buttons, .lang-buttons { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+        .theme-btn, .lang-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--border-light);
+            color: var(--text-primary);
+            padding: 8px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 11px;
+            flex: 1;
+        }
+        .theme-btn.active-theme, .lang-btn.active-lang { background: var(--accent-orange); color: white; }
+
+        .main-content {
+            flex: 1;
+            padding: 24px 32px;
+            max-width: 1400px;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .search-section {
+            display: flex;
+            gap: 8px;
+            background: var(--card-bg);
+            padding: 6px 6px 6px 20px;
+            border-radius: 50px;
+            border: 2px solid var(--border-light);
+        }
+        .search-section input {
+            border: none;
+            outline: none;
+            font-size: 15px;
+            width: 240px;
+            background: transparent;
+            color: var(--text-primary);
+            font-family: 'Quicksand', sans-serif;
+        }
+        .search-section button {
+            background: var(--accent-orange);
+            border: none;
+            border-radius: 40px;
+            padding: 12px 22px;
+            font-weight: 700;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 0 var(--accent-dark);
+            transition: all 0.2s;
+        }
+        .search-section button:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--accent-dark); }
+
+        .user-stats {
+            display: flex;
+            gap: 20px;
+            background: var(--card-bg);
+            padding: 10px 20px;
+            border-radius: 50px;
+            border: 2px solid var(--border-light);
+            font-weight: 700;
+        }
+        .user-stats span { display: flex; align-items: center; gap: 6px; }
+
+        .page { display: none; }
+        .page.active-page { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 6px 0 var(--accent-dark);
+            border: 2px solid var(--border-light);
+        }
+        .stat-value { font-size: 2rem; font-weight: 800; margin: 8px 0; }
+
+        .section-title {
+            font-weight: 800;
+            font-size: 22px;
+            margin: 28px 0 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 18px;
+            box-shadow: 0 8px 0 var(--border-light);
+            border: 2px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .course-card:hover { transform: translateY(-6px); box-shadow: 0 12px 0 var(--accent-orange); }
+        .course-thumb {
+            height: 120px;
+            background: linear-gradient(145deg, #273c75, #192a56);
+            border-radius: 18px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 42px;
+        }
+        .progress-bar {
+            height: 10px;
+            background: var(--progress-bg);
+            border-radius: 20px;
+            margin: 10px 0 6px;
+        }
+        .progress-fill {
+            height: 10px;
+            border-radius: 20px;
+            background: linear-gradient(90deg, var(--accent-orange), var(--accent-dark));
+            transition: width 0.5s;
+        }
+
+        .job-roles, .opportunity-card, .suggestion-card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 24px;
+            box-shadow: 0 10px 0 var(--accent-dark);
+            border: 2px solid var(--border-light);
+            margin: 20px 0;
+        }
+        .role-chips { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; }
+        .role-chip {
+            background: var(--nav-hover);
+            padding: 12px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 0 var(--accent-dark);
+        }
+
+        .quest-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 18px;
+            margin-bottom: 14px;
+            cursor: pointer;
+            border-left: 5px solid var(--accent-orange);
+            box-shadow: 0 4px 0 var(--border-light);
+            transition: all 0.2s;
+        }
+        .quest-card.boss { border-left-color: var(--danger); }
+        .quest-card:hover { transform: translateX(6px); }
+
+        .opportunity-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .apply-btn {
+            background: var(--info);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.2s;
+            display: inline-block;
+            box-shadow: 0 4px 0 #1d4ed8;
+        }
+        .apply-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 #1d4ed8; }
+        
+        .suggestion-card {
+            background: linear-gradient(135deg, var(--card-bg), var(--nav-hover));
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .suggestion-card:hover { transform: translateY(-4px); }
+        
+        .badge-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 14px;
+        }
+        .badge {
+            text-align: center;
+            padding: 16px;
+            background: var(--card-bg);
+            border-radius: 18px;
+            cursor: pointer;
+            border: 2px solid var(--border-light);
+            transition: all 0.2s;
+        }
+        .badge.earned { background: linear-gradient(135deg, var(--accent-orange), var(--accent-dark)); animation: pulse 2s infinite; }
+        .badge:hover { transform: scale(1.05); }
+        @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+
+        .marketplace-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 18px;
+        }
+        .market-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .market-item:hover { transform: translateY(-4px); box-shadow: 0 8px 0 var(--accent-dark); }
+
+        .btn {
+            background: var(--accent-orange);
+            border: none;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.2s;
+            box-shadow: 0 4px 0 var(--accent-dark);
+            font-family: 'Quicksand', sans-serif;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--accent-dark); }
+        .btn:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--accent-dark); }
+        .btn-success { background: var(--success); box-shadow: 0 4px 0 #0d9488; }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(6px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.show { display: flex; }
+        .modal-content {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 30px;
+            max-width: 560px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 0 var(--accent-dark);
+            border: 3px solid var(--border-light);
+        }
+        .chapter-item {
+            background: var(--bg-secondary);
+            margin: 12px 0;
+            padding: 14px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: 2px solid var(--border-light);
+            transition: all 0.2s;
+        }
+        .chapter-item.completed { border-left: 8px solid var(--success); opacity: 0.9; }
+        .quiz-option {
+            background: var(--bg-primary);
+            margin: 8px 0;
+            padding: 12px 16px;
+            border-radius: 40px;
+            border: 2px solid var(--border-light);
+            cursor: pointer;
+            transition: all 0.1s;
+        }
+        .quiz-option.selected { background: var(--accent-orange); color: white; border-color: var(--accent-dark); }
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 40px;
+            z-index: 1500;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 6px 0 #0d9488;
+            font-weight: 600;
+        }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(100px); } to { opacity: 1; transform: translateX(0); } }
+
+        .heatmap {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+            margin-top: 16px;
+        }
+        .heatmap-day {
+            aspect-ratio: 1;
+            background: var(--progress-bg);
+            border-radius: 6px;
+        }
+        .heatmap-day[data-intensity="1"] { background: var(--success); opacity: 0.3; }
+        .heatmap-day[data-intensity="2"] { background: var(--success); opacity: 0.5; }
+        .heatmap-day[data-intensity="3"] { background: var(--success); opacity: 0.7; }
+        .heatmap-day[data-intensity="4"] { background: var(--success); opacity: 0.9; }
+        .heatmap-day[data-intensity="5"] { background: var(--success); opacity: 1; }
+
+        @media (max-width: 800px) {
+            .app-wrapper { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; }
+            .opportunity-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <div id="toastContainer"></div>
+
+    <div class="app-wrapper">
+        <div class="sidebar">
+            <div class="logo-area">
+                <i class="fas fa-layer-group logo-icon"></i>
+                <span class="logo-text" data-i18n="appName">Skill Stack</span>
+            </div>
+            <button class="nav-item active" data-page="dashboard"><i class="fas fa-home"></i> <span data-i18n="navDashboard">Dashboard</span></button>
+            <button class="nav-item" data-page="courses"><i class="fas fa-play-circle"></i> <span data-i18n="navCourses">My Courses</span></button>
+            <button class="nav-item" data-page="quests"><i class="fas fa-scroll"></i> <span data-i18n="navQuests">Quests</span></button>
+            <button class="nav-item" data-page="duel"><i class="fas fa-swords"></i> <span data-i18n="navDuel">Duel Arena</span></button>
+            <button class="nav-item" data-page="jobs"><i class="fas fa-briefcase"></i> <span data-i18n="navJobs">Job Portal</span></button>
+            <button class="nav-item" data-page="placements"><i class="fas fa-rocket"></i> <span data-i18n="navPlacements">Live Placements</span></button>
+            <button class="nav-item" data-page="suggestions"><i class="fas fa-lightbulb"></i> <span data-i18n="navSuggestions">Suggestions</span></button>
+            <button class="nav-item" data-page="achievements"><i class="fas fa-trophy"></i> <span data-i18n="navAchievements">Achievements</span></button>
+            <button class="nav-item" data-page="certificates"><i class="fas fa-certificate"></i> <span data-i18n="navCertificates">Certificates</span></button>
+            <button class="nav-item" data-page="marketplace"><i class="fas fa-store"></i> <span data-i18n="navMarketplace">Marketplace</span></button>
+            <button class="nav-item" data-page="analytics"><i class="fas fa-chart-line"></i> <span data-i18n="navAnalytics">Analytics</span></button>
+
+            <div class="language-section">
+                <div style="font-weight: 700; margin-bottom: 8px;"><i class="fas fa-globe"></i> <span data-i18n="language">Language</span></div>
+                <div class="lang-buttons">
+                    <button class="lang-btn active-lang" data-lang="en">🇬🇧 English</button>
+                    <button class="lang-btn" data-lang="es">🇪🇸 Español</button>
+                    <button class="lang-btn" data-lang="fr">🇫🇷 Français</button>
+                    <button class="lang-btn" data-lang="de">🇩🇪 Deutsch</button>
+                    <button class="lang-btn" data-lang="hi">🇮🇳 हिंदी</button>
+                </div>
+            </div>
+
+            <div class="theme-section">
+                <div style="font-weight: 700; margin-bottom: 8px;"><i class="fas fa-palette"></i> <span data-i18n="theme">Theme</span></div>
+                <div class="theme-buttons">
+                    <button class="theme-btn active-theme" data-theme="">☀️ <span data-i18n="themeLight">Light</span></button>
+                    <button class="theme-btn" data-theme="dark">🌙 <span data-i18n="themeDark">Dark</span></button>
+                    <button class="theme-btn" data-theme="dim">🌓 <span data-i18n="themeDim">Dim</span></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="top-bar">
+                <div class="search-section">
+                    <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="🔍 Search courses, skills, jobs...">
+                    <button onclick="handleSearch()"><i class="fas fa-search"></i> <span data-i18n="searchBtn">Search</span></button>
+                </div>
+                <div class="user-stats" id="userStats">
+                    <span><i class="fas fa-star"></i> <span data-i18n="level">Lvl</span> <span id="userLevel">12</span></span>
+                    <span><i class="fas fa-bolt"></i> <span id="userXP">2450</span> XP</span>
+                    <span><i class="fas fa-coins"></i> <span id="userCoins">1250</span></span>
+                    <span><i class="fas fa-fire"></i> <span id="userStreak">15</span></span>
+                </div>
+            </div>
+            <div class="page active-page" id="dashboard-page"></div>
+            <div class="page" id="courses-page"></div>
+            <div class="page" id="quests-page"></div>
+            <div class="page" id="duel-page"></div>
+            <div class="page" id="jobs-page"></div>
+            <div class="page" id="placements-page"></div>
+            <div class="page" id="suggestions-page"></div>
+            <div class="page" id="achievements-page"></div>
+            <div class="page" id="certificates-page"></div>
+            <div class="page" id="marketplace-page"></div>
+            <div class="page" id="analytics-page"></div>
+        </div>
+    </div>
+
+    <div class="modal" id="courseDetailModal"><div class="modal-content" id="courseModalContent"></div></div>
+    <div class="modal" id="certModal"><div class="modal-content"><h2 style="color: var(--accent-orange); margin-bottom: 20px;"><i class="fas fa-certificate"></i> <span data-i18n="requestCert">Request Certificate</span></h2><div style="background: linear-gradient(135deg, var(--accent-orange)20, var(--accent-dark)40); border-radius: 20px; padding: 25px; text-align: center; margin-bottom: 20px;"><i class="fas fa-award" style="font-size: 50px;"></i><h3 style="margin: 10px 0;" data-i18n="certTitle">Skill Stack Certification</h3><p data-i18n="presentedTo">Presented to</p><h2 id="previewName">Learner</h2></div><input type="text" id="certNameInput" data-i18n-placeholder="enterName" placeholder="Your full name" style="width: 100%; padding: 14px; border-radius: 30px; border: 2px solid var(--border-light); background: var(--bg-primary); color: var(--text-primary); margin-bottom: 12px;"><select id="certCourseSelect" style="width: 100%; padding: 14px; border-radius: 30px; border: 2px solid var(--border-light); background: var(--bg-primary); margin-bottom: 20px;"><option>JavaScript Essentials</option><option>React Mastery</option><option>Python Data Science</option><option>UI/UX Design</option></select><div style="display: flex; gap: 12px;"><button class="btn" onclick="closeCertModal()" style="flex:1;" data-i18n="cancel">Cancel</button><button class="btn btn-success" onclick="generateCertificate()" style="flex:1;" data-i18n="generate">Generate</button></div></div></div>
+
+    <script>
+        // ============ COMPLETE MULTILINGUAL DICTIONARY ============
+        const translations = {
+            en: {
+                appName:"Skill Stack",
+                navDashboard:"Dashboard",
+                navCourses:"My Courses",
+                navQuests:"Quests",
+                navDuel:"Duel Arena",
+                navJobs:"Job Portal",
+                navPlacements:"Live Placements",
+                navSuggestions:"Suggestions",
+                navAchievements:"Achievements",
+                navCertificates:"Certificates",
+                navMarketplace:"Marketplace",
+                navAnalytics:"Analytics",
+                language:"Language",
+                theme:"Theme",
+                themeLight:"Light",
+                themeDark:"Dark",
+                themeDim:"Dim",
+                searchPlaceholder:"🔍 Search courses, skills, jobs...",
+                searchBtn:"Search",
+                level:"Lvl",
+                requestCert:"Request Certificate",
+                certTitle:"Skill Stack Certification",
+                presentedTo:"Presented to",
+                enterName:"Your full name",
+                cancel:"Cancel",
+                generate:"Generate",
+                continueLearning:"Continue Learning",
+                eligibleJobs:"Eligible Job Roles",
+                avgProgress:"Based on your average progress",
+                claimDaily:"Claim Daily Reward",
+                myLearning:"My Learning Path",
+                learningStreak:"Learning Streak",
+                activeQuests:"Active Quests",
+                completed:"Completed",
+                duelArena:"Knowledge Duel Arena",
+                readyBattle:"Ready to Battle?",
+                findMatch:"Find Match",
+                leaderboard:"Leaderboard",
+                jobMatches:"Job Matches For You",
+                yourSkillMatch:"Your Skill Match",
+                recommended:"Recommended Positions",
+                achievements:"Achievements & Badges",
+                activityHeatmap:"Activity Heatmap",
+                yourCertificates:"Your Certificates",
+                noCerts:"No certificates yet. Complete courses to earn them!",
+                requestNew:"Request New Certificate",
+                marketplace:"Marketplace",
+                yourInventory:"Your Inventory",
+                learningAnalytics:"Learning Analytics",
+                overallProgress:"Overall Progress",
+                skillsMastered:"Skills Mastered",
+                questsDone:"Quests Done",
+                weakAreas:"Weak Areas",
+                generateAI:"🤖 Generate AI Practice Quest",
+                dailyReward:"Daily reward claimed!",
+                energyRestored:"Energy restored by 5!",
+                streakActive:"Streak Freeze active!",
+                aiQuest:"AI generating quest...",
+                newAIQuest:"New AI quest created",
+                certificateGen:"Certificate generated",
+                searchDemo:"Searching for",
+                correct:"Correct!",
+                wrong:"Wrong answer",
+                levelUp:"LEVEL UP",
+                courseMastered:"Course Mastered",
+                quizComplete:"Quiz completed",
+                duelComplete:"Duel Complete",
+                liveOpportunities:"🚀 Live Placement Opportunities",
+                directApply:"Apply Now",
+                suggestionsTitle:"💡 Personalized Suggestions & Improvements",
+                aiRecommendation:"AI-Powered Recommendation",
+                improvementTip:"Improvement Tip",
+                takeAction:"Take Action →",
+                posted:"Posted",
+                match:"Match",
+                location:"Location",
+                salary:"Salary",
+                platform:"Platform",
+                actionPlan:"Added to your action plan!",
+                personalizedPath:"Personalized Learning Path",
+                weRecommend:"we recommend focusing on",
+                allOnTrack:"All courses on track!",
+                generateCustomQuest:"🤖 Generate Custom AI Quest",
+                realTimeJobs:"Real-time job openings sourced from LinkedIn, Naukri, Indeed & more. Apply directly!",
+                updateResume:"⚠️ Live links redirect to job portals. Update your resume and apply soon!"
+            },
+            es: {
+                appName:"Skill Stack", navDashboard:"Panel", navCourses:"Mis Cursos", navQuests:"Misiones", navDuel:"Arena Duelo", navJobs:"Portal Empleo", navPlacements:"Oportunidades en Vivo", navSuggestions:"Sugerencias", navAchievements:"Logros", navCertificates:"Certificados", navMarketplace:"Mercado", navAnalytics:"Analítica", language:"Idioma", theme:"Tema", themeLight:"Claro", themeDark:"Oscuro", themeDim:"Tenue", searchPlaceholder:"🔍 Buscar cursos, habilidades, empleos...", searchBtn:"Buscar", level:"Nvl", requestCert:"Solicitar Certificado", certTitle:"Certificación Skill Stack", presentedTo:"Presentado a", enterName:"Tu nombre completo", cancel:"Cancelar", generate:"Generar", continueLearning:"Continuar Aprendiendo", eligibleJobs:"Roles Laborales Elegibles", avgProgress:"Basado en tu progreso promedio", claimDaily:"Reclamar Recompensa Diaria", myLearning:"Mi Ruta de Aprendizaje", learningStreak:"Racha de Aprendizaje", activeQuests:"Misiones Activas", completed:"Completadas", duelArena:"Arena de Duelos", readyBattle:"¿Listo para batallar?", findMatch:"Buscar Oponente", leaderboard:"Tabla de Clasificación", jobMatches:"Ofertas para Ti", yourSkillMatch:"Tu Coincidencia", recommended:"Posiciones Recomendadas", achievements:"Logros e Insignias", activityHeatmap:"Mapa de Calor", yourCertificates:"Tus Certificados", noCerts:"¡Completa cursos para obtener certificados!", requestNew:"Solicitar Nuevo Certificado", marketplace:"Mercado", yourInventory:"Tu Inventario", learningAnalytics:"Analítica de Aprendizaje", overallProgress:"Progreso General", skillsMastered:"Habilidades Dominadas", questsDone:"Misiones Completadas", weakAreas:"Áreas Débiles", generateAI:"🤖 Generar Misión IA", dailyReward:"¡Recompensa diaria reclamada!", energyRestored:"¡Energía restaurada!", streakActive:"¡Congelador activo!", aiQuest:"Generando misión IA...", newAIQuest:"Nueva misión IA creada", certificateGen:"Certificado generado", searchDemo:"Buscando", correct:"¡Correcto!", wrong:"Respuesta incorrecta", levelUp:"¡SUBIDA DE NIVEL!", courseMastered:"¡Curso Dominado!", quizComplete:"Cuestionario completado", duelComplete:"Duelo Completado", liveOpportunities:"🚀 Oportunidades de Empleo en Vivo", directApply:"Aplicar Ahora", suggestionsTitle:"💡 Sugerencias Personalizadas", aiRecommendation:"Recomendación IA", improvementTip:"Consejo de Mejora", takeAction:"Tomar Acción →", posted:"Publicado", match:"Coincidencia", location:"Ubicación", salary:"Salario", platform:"Plataforma", actionPlan:"¡Agregado a tu plan de acción!", personalizedPath:"Ruta de Aprendizaje Personalizada", weRecommend:"recomendamos enfocarte en", allOnTrack:"¡Todos los cursos en camino!", generateCustomQuest:"🤖 Generar Misión IA Personalizada", realTimeJobs:"Ofertas de trabajo en tiempo real de LinkedIn, Naukri, Indeed y más. ¡Aplica directamente!", updateResume:"⚠️ Los enlaces redirigen a portales de empleo. ¡Actualiza tu CV y aplica pronto!"
+            },
+            fr: {
+                appName:"Skill Stack", navDashboard:"Tableau de bord", navCourses:"Mes cours", navQuests:"Quêtes", navDuel:"Arène de duel", navJobs:"Portail emploi", navPlacements:"Opportunités en Direct", navSuggestions:"Suggestions", navAchievements:"Succès", navCertificates:"Certificats", navMarketplace:"Marché", navAnalytics:"Analytique", language:"Langue", theme:"Thème", themeLight:"Clair", themeDark:"Sombre", themeDim:"Tamisé", searchPlaceholder:"🔍 Rechercher cours, compétences...", searchBtn:"Chercher", level:"Niv", requestCert:"Demander certificat", certTitle:"Certification Skill Stack", presentedTo:"Décerné à", enterName:"Nom complet", cancel:"Annuler", generate:"Générer", continueLearning:"Continuer", eligibleJobs:"Postes éligibles", avgProgress:"Progression moyenne", claimDaily:"Récompense quotidienne", myLearning:"Mon parcours", learningStreak:"Série d'apprentissage", activeQuests:"Quêtes actives", completed:"Terminées", duelArena:"Arène du savoir", readyBattle:"Prêt au combat?", findMatch:"Trouver adversaire", leaderboard:"Classement", jobMatches:"Offres d'emploi", yourSkillMatch:"Votre adéquation", recommended:"Postes recommandés", achievements:"Succès", activityHeatmap:"Carte de chaleur", yourCertificates:"Vos certificats", noCerts:"Aucun certificat. Terminez des cours!", requestNew:"Nouveau certificat", marketplace:"Marché", yourInventory:"Inventaire", learningAnalytics:"Analytique", overallProgress:"Progression", skillsMastered:"Compétences maîtrisées", questsDone:"Quêtes accomplies", weakAreas:"Points faibles", generateAI:"🤖 Générer quête IA", dailyReward:"Récompense quotidienne!", energyRestored:"Énergie restaurée!", streakActive:"Gel de série actif!", aiQuest:"Génération quête IA...", newAIQuest:"Nouvelle quête IA", certificateGen:"Certificat généré", searchDemo:"Recherche de", correct:"Correct!", wrong:"Mauvaise réponse", levelUp:"MONTÉE DE NIVEAU", courseMastered:"Cours maîtrisé", quizComplete:"Quiz terminé", duelComplete:"Duel terminé", liveOpportunities:"🚀 Offres d'Emploi en Direct", directApply:"Postuler", suggestionsTitle:"💡 Suggestions Personnalisées", aiRecommendation:"Recommandation IA", improvementTip:"Astuce", takeAction:"Agir →", posted:"Publié", match:"Correspondance", location:"Lieu", salary:"Salaire", platform:"Plateforme", actionPlan:"Ajouté à votre plan!", personalizedPath:"Parcours personnalisé", weRecommend:"nous recommandons de se concentrer sur", allOnTrack:"Tous les cours sont sur la bonne voie!", generateCustomQuest:"🤖 Générer quête IA", realTimeJobs:"Offres d'emploi en temps réel de LinkedIn, Naukri, Indeed. Postulez directement!", updateResume:"⚠️ Liens vers les portails d'emploi. Mettez à jour votre CV!"
+            },
+            de: {
+                appName:"Skill Stack", navDashboard:"Dashboard", navCourses:"Meine Kurse", navQuests:"Quests", navDuel:"Duell-Arena", navJobs:"Jobportal", navPlacements:"Live-Stellenangebote", navSuggestions:"Vorschläge", navAchievements:"Erfolge", navCertificates:"Zertifikate", navMarketplace:"Marktplatz", navAnalytics:"Analytik", language:"Sprache", theme:"Thema", themeLight:"Hell", themeDark:"Dunkel", themeDim:"Gedimmt", searchPlaceholder:"🔍 Kurse, Fähigkeiten, Jobs suchen...", searchBtn:"Suchen", level:"Stufe", requestCert:"Zertifikat anfordern", certTitle:"Skill Stack Zertifizierung", presentedTo:"Ausgestellt an", enterName:"Ihr vollständiger Name", cancel:"Abbrechen", generate:"Generieren", continueLearning:"Weiter lernen", eligibleJobs:"Geeignete Jobrollen", avgProgress:"Basierend auf Ihrem Fortschritt", claimDaily:"Tägliche Belohnung", myLearning:"Mein Lernpfad", learningStreak:"Lernserie", activeQuests:"Aktive Quests", completed:"Abgeschlossen", duelArena:"Wissensduell", readyBattle:"Bereit zu kämpfen?", findMatch:"Gegner finden", leaderboard:"Bestenliste", jobMatches:"Jobübereinstimmungen", yourSkillMatch:"Ihr Fähigkeiten-Match", recommended:"Empfohlene Positionen", achievements:"Erfolge & Abzeichen", activityHeatmap:"Aktivitätsübersicht", yourCertificates:"Ihre Zertifikate", noCerts:"Noch keine Zertifikate. Schließen Sie Kurse ab!", requestNew:"Neues Zertifikat", marketplace:"Marktplatz", yourInventory:"Inventar", learningAnalytics:"Lernanalytik", overallProgress:"Gesamtfortschritt", skillsMastered:"Gemeisterte Fähigkeiten", questsDone:"Abgeschlossene Quests", weakAreas:"Schwache Bereiche", generateAI:"🤖 KI-Quest generieren", dailyReward:"Tägliche Belohnung erhalten!", energyRestored:"Energie wiederhergestellt!", streakActive:"Serien-Schutz aktiv!", aiQuest:"KI generiert Quest...", newAIQuest:"Neue KI-Quest erstellt", certificateGen:"Zertifikat generiert", searchDemo:"Suche nach", correct:"Richtig!", wrong:"Falsche Antwort", levelUp:"LEVEL AUFSTIEG", courseMastered:"Kurs gemeistert", quizComplete:"Quiz abgeschlossen", duelComplete:"Duell beendet", liveOpportunities:"🚀 Live-Stellenangebote", directApply:"Jetzt bewerben", suggestionsTitle:"💡 Personalisierte Vorschläge", aiRecommendation:"KI-Empfehlung", improvementTip:"Verbesserungstipp", takeAction:"Aktion →", posted:"Veröffentlicht", match:"Übereinstimmung", location:"Standort", salary:"Gehalt", platform:"Plattform", actionPlan:"Zu Ihrem Aktionsplan hinzugefügt!", personalizedPath:"Personalisierter Lernpfad", weRecommend:"wir empfehlen den Fokus auf", allOnTrack:"Alle Kurse auf Kurs!", generateCustomQuest:"🤖 Benutzerdefinierte KI-Quest", realTimeJobs:"Echtzeit-Jobangebote von LinkedIn, Naukri, Indeed. Direkt bewerben!", updateResume:"⚠️ Links zu Jobportalen. Aktualisieren Sie Ihren Lebenslauf!"
+            },
+            hi: {
+                appName:"स्किल स्टैक", navDashboard:"डैशबोर्ड", navCourses:"मेरे कोर्स", navQuests:"क्वेस्ट", navDuel:"द्वंद्व क्षेत्र", navJobs:"नौकरी पोर्टल", navPlacements:"लाइव प्लेसमेंट", navSuggestions:"सुझाव", navAchievements:"उपलब्धियाँ", navCertificates:"प्रमाणपत्र", navMarketplace:"बाज़ार", navAnalytics:"विश्लेषण", language:"भाषा", theme:"थीम", themeLight:"हल्का", themeDark:"गहरा", themeDim:"मंद", searchPlaceholder:"🔍 कोर्स, कौशल, नौकरियाँ खोजें...", searchBtn:"खोजें", level:"स्तर", requestCert:"प्रमाणपत्र अनुरोध करें", certTitle:"स्किल स्टैक प्रमाणन", presentedTo:"प्रस्तुत किया", enterName:"आपका पूरा नाम", cancel:"रद्द करें", generate:"बनाएँ", continueLearning:"सीखना जारी रखें", eligibleJobs:"पात्र नौकरी भूमिकाएँ", avgProgress:"आपकी औसत प्रगति के आधार पर", claimDaily:"दैनिक पुरस्कार लें", myLearning:"मेरा सीखने का मार्ग", learningStreak:"सीखने की लकीर", activeQuests:"सक्रिय क्वेस्ट", completed:"पूर्ण", duelArena:"नॉलेज द्वंद्व क्षेत्र", readyBattle:"युद्ध के लिए तैयार?", findMatch:"प्रतिद्वंद्वी खोजें", leaderboard:"लीडरबोर्ड", jobMatches:"आपके लिए नौकरी मिलान", yourSkillMatch:"आपका कौशल मिलान", recommended:"अनुशंसित पद", achievements:"उपलब्धियाँ और बैज", activityHeatmap:"गतिविधि हीटमैप", yourCertificates:"आपके प्रमाणपत्र", noCerts:"अभी कोई प्रमाणपत्र नहीं। कोर्स पूरे करें!", requestNew:"नया प्रमाणपत्र अनुरोध करें", marketplace:"बाज़ार", yourInventory:"आपकी सूची", learningAnalytics:"सीखने का विश्लेषण", overallProgress:"कुल प्रगति", skillsMastered:"निपुण कौशल", questsDone:"पूर्ण क्वेस्ट", weakAreas:"कमजोर क्षेत्र", generateAI:"🤖 AI प्रशिक्षण क्वेस्ट बनाएँ", dailyReward:"दैनिक पुरस्कार प्राप्त हुआ!", energyRestored:"5 ऊर्जा बहाल!", streakActive:"स्ट्रीक फ्रीज सक्रिय!", aiQuest:"AI क्वेस्ट जनरेट हो रहा...", newAIQuest:"नई AI क्वेस्ट बनाई गई", certificateGen:"प्रमाणपत्र बन गया", searchDemo:"खोज रहे हैं", correct:"सही!", wrong:"गलत उत्तर", levelUp:"स्तर वृद्धि", courseMastered:"कोर्स पूरा हुआ", quizComplete:"प्रश्नोत्तरी पूर्ण", duelComplete:"द्वंद्व पूर्ण", liveOpportunities:"🚀 लाइव प्लेसमेंट के अवसर", directApply:"अभी आवेदन करें", suggestionsTitle:"💡 व्यक्तिगत सुझाव और सुधार", aiRecommendation:"AI-संचालित सिफारिश", improvementTip:"सुधार युक्ति", takeAction:"कार्रवाई करें →", posted:"पोस्ट किया गया", match:"मिलान", location:"स्थान", salary:"वेतन", platform:"प्लेटफॉर्म", actionPlan:"आपकी कार्ययोजना में जोड़ा गया!", personalizedPath:"व्यक्तिगत सीखने का मार्ग", weRecommend:"हम ध्यान केंद्रित करने की सलाह देते हैं", allOnTrack:"सभी कोर्स ट्रैक पर हैं!", generateCustomQuest:"🤖 कस्टम AI क्वेस्ट बनाएँ", realTimeJobs:"LinkedIn, Naukri, Indeed से वास्तविक समय में नौकरी के अवसर। सीधे आवेदन करें!", updateResume:"⚠️ लाइव लिंक जॉब पोर्टल पर रीडायरेक्ट करते हैं। अपना रिज्यूम अपडेट करें और जल्दी आवेदन करें!"
+            }
+        };
+        
+        let currentLang = 'en';
+        function t(key) { return translations[currentLang]?.[key] || translations.en[key] || key; }
+        
+        function updateAllText() {
+            document.querySelectorAll('[data-i18n]').forEach(el => { 
+                const key = el.getAttribute('data-i18n'); 
+                if (key) el.innerText = t(key); 
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { 
+                const key = el.getAttribute('data-i18n-placeholder'); 
+                if (key) el.placeholder = t(key); 
+            });
+            renderAllPages();
+        }
+        
+        function setLanguage(lang) { 
+            currentLang = lang; 
+            localStorage.setItem('skillstack-lang', lang); 
+            updateAllText(); 
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active-lang')); 
+            document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active-lang'); 
+        }
+        
+        // ============ GAME STATE ============
+        const courseLibrary = { 
+            1: { title: 'JavaScript: Zero to Hero', icon: 'fab fa-js', progress: 78, xpReward: 500, chapters: [ { title: 'Variables & Data Types', completed: true, quiz: { question: 'What keyword declares a variable in JS?', options: ['var', 'let', 'const', 'All of the above'], correct: 3, xp: 30 } }, { title: 'Functions & Scope', completed: false, quiz: { question: 'What is the output of "typeof null"?', options: ['null', 'object', 'undefined', 'number'], correct: 1, xp: 40 } }, { title: 'Arrays & Objects', completed: false, quiz: { question: 'Which method adds an element to the end of an array?', options: ['push()', 'pop()', 'shift()', 'unshift()'], correct: 0, xp: 35 } } ] }, 
+            2: { title: 'React & Redux Mastery', icon: 'fab fa-react', progress: 63, xpReward: 600, chapters: [ { title: 'Components & Props', completed: true, quiz: { question: 'What hook manages state?', options: ['useEffect', 'useState', 'useReducer', 'useContext'], correct: 1, xp: 45 } }, { title: 'State & Lifecycle', completed: false, quiz: { question: 'Which lifecycle runs after first render?', options: ['componentDidMount', 'render', 'constructor', 'componentWillUnmount'], correct: 0, xp: 50 } } ] }, 
+            3: { title: 'Python Data Science', icon: 'fab fa-python', progress: 45, xpReward: 700, chapters: [ { title: 'Pandas Basics', completed: false, quiz: { question: 'How to read CSV with pandas?', options: ['pd.read_csv()', 'pd.load_csv()', 'pd.import_csv()', 'pd.csv_read()'], correct: 0, xp: 40 } }, { title: 'Data Visualization', completed: false, quiz: { question: 'Which library is best for plots?', options: ['matplotlib', 'numpy', 'scipy', 'seaborn'], correct: 0, xp: 45 } } ] }, 
+            4: { title: 'UI/UX Design Pro', icon: 'fas fa-paint-brush', progress: 92, xpReward: 400, chapters: [ { title: 'Color Theory', completed: true, quiz: { question: 'What does UX stand for?', options: ['User Experience', 'User Export', 'Universal Xray', 'Unit X'], correct: 0, xp: 25 } }, { title: 'Wireframing', completed: false, quiz: { question: 'Which tool is for prototyping?', options: ['Figma', 'Photoshop', 'Illustrator', 'Premiere'], correct: 0, xp: 30 } } ] } 
+        };
+        
+        const state = { 
+            user: { level: 12, xp: 2450, coins: 1250, streak: 15, energy: 15, maxEnergy: 20 }, 
+            courses: [ { id: 1, title: 'JavaScript: Zero to Hero', icon: 'fab fa-js', progress: 78, xpReward: 500 }, { id: 2, title: 'React & Redux Mastery', icon: 'fab fa-react', progress: 63, xpReward: 600 }, { id: 3, title: 'Python Data Science', icon: 'fab fa-python', progress: 45, xpReward: 700 }, { id: 4, title: 'UI/UX Design Pro', icon: 'fas fa-paint-brush', progress: 92, xpReward: 400 } ], 
+            quests: [ { id: 1, title: 'Daily Coding Challenge', type: 'daily', xpReward: 100, coinReward: 50, difficulty: 2, progress: 3, maxProgress: 5, icon: '📝' }, { id: 2, title: 'Boss: Algorithm Dragon', type: 'boss', xpReward: 500, coinReward: 200, difficulty: 4, progress: 2, maxProgress: 5, icon: '🐉' }, { id: 3, title: 'Speed Run: JavaScript', type: 'challenge', xpReward: 150, coinReward: 75, difficulty: 3, progress: 1, maxProgress: 3, icon: '⚡' } ], 
+            badges: [ { id: 1, name: 'First Steps', icon: '🌟', earned: true, desc: 'Complete first course' }, { id: 2, name: 'Week Warrior', icon: '🔥', earned: true, desc: '7-day streak' }, { id: 3, name: 'Dragon Slayer', icon: '🐉', earned: false, desc: 'Defeat a boss' }, { id: 4, name: 'Speed Demon', icon: '⚡', earned: false, desc: 'Complete speed run' }, { id: 5, name: 'Knowledge Master', icon: '🧠', earned: false, desc: 'Master 5 skills' } ], 
+            inventory: [ { name: 'Streak Freeze', quantity: 2, icon: '❄️', price: 200 }, { name: 'Double XP Token', quantity: 1, icon: '⚡', price: 500 }, { name: 'Energy Potion', quantity: 3, icon: '💪', price: 150 } ], 
+            certificates: [], completedQuests: 8, bossDefeated: 1, 
+            jobRoles: [ { name: 'Frontend Developer', req: 60, icon: '💻' }, { name: 'Full-Stack Engineer', req: 75, icon: '⚙️' }, { name: 'Data Analyst', req: 45, icon: '📊' }, { name: 'UI Designer', req: 70, icon: '🎨' } ] 
+        };
+        
+        // Live Placement Opportunities
+        const liveOpportunities = [
+            { id: 1, title: "Frontend Developer (React)", company: "Microsoft India", location: "Bangalore | Remote", salary: "₹12-18 LPA", platform: "LinkedIn", applyUrl: "https://www.linkedin.com/jobs/view/", posted: "2 days ago", match: 94 },
+            { id: 2, title: "Full Stack Engineer", company: "Amazon", location: "Hyderabad | Pune", salary: "₹15-22 LPA", platform: "Naukri", applyUrl: "https://www.naukri.com/job-listings", posted: "1 day ago", match: 88 },
+            { id: 3, title: "Data Scientist", company: "Google", location: "Bangalore", salary: "₹20-30 LPA", platform: "LinkedIn", applyUrl: "https://www.linkedin.com/jobs/", posted: "3 days ago", match: 76 },
+            { id: 4, title: "UI/UX Designer", company: "Adobe", location: "Noida | Remote", salary: "₹10-15 LPA", platform: "Indeed", applyUrl: "https://www.indeed.com/q-UI-UX-designer-jobs.html", posted: "5 days ago", match: 91 },
+            { id: 5, title: "Python Backend Developer", company: "Paytm", location: "NCR", salary: "₹8-14 LPA", platform: "Naukri", applyUrl: "https://www.naukri.com/python-jobs", posted: "Just now", match: 82 }
+        ];
+        
+        // Get AI Suggestions based on user progress
+        function getSuggestions() {
+            const weakCourses = state.courses.filter(c => c.progress < 70);
+            const suggestions = [];
+            if(weakCourses.length > 0) suggestions.push({ type: "course", text: `Focus on completing ${weakCourses[0].title} (${weakCourses[0].progress}% complete). Daily practice will boost your skills!`, icon: "📚" });
+            if(state.user.streak < 7) suggestions.push({ type: "streak", text: "You're on a roll! Maintain your learning streak to unlock 'Week Warrior' badge.", icon: "🔥" });
+            if(state.user.coins > 500) suggestions.push({ type: "shop", text: "Visit Marketplace and buy 'Double XP Token' to accelerate your learning!", icon: "🛒" });
+            if(state.completedQuests < 15) suggestions.push({ type: "quest", text: "Complete more quests to earn bonus XP and coins. Try the Boss challenge!", icon: "⚔️" });
+            suggestions.push({ type: "ai", text: "Based on your profile, learning TypeScript next would complement your JavaScript skills perfectly.", icon: "🤖" });
+            suggestions.push({ type: "project", text: "Build a portfolio project using React and deploy it on Vercel - great for interviews!", icon: "💼" });
+            return suggestions;
+        }
+        
+        function showToast(msg, type='success') { 
+            const t = document.createElement('div'); 
+            t.className='toast'; 
+            t.style.background = type==='error'?'var(--danger)':'var(--success)'; 
+            t.innerHTML=msg; 
+            document.getElementById('toastContainer').appendChild(t); 
+            setTimeout(()=>t.remove(),3000); 
+        }
+        
+        function updateUI() { 
+            document.getElementById('userLevel').textContent = state.user.level; 
+            document.getElementById('userXP').textContent = state.user.xp; 
+            document.getElementById('userCoins').textContent = state.user.coins; 
+            document.getElementById('userStreak').textContent = state.user.streak; 
+        }
+        
+        function addXP(amount, source) { 
+            state.user.xp += amount; 
+            const xpNeeded = Math.floor(100 * Math.pow(1.5, state.user.level - 1)); 
+            if (state.user.xp >= xpNeeded) { 
+                state.user.level++; 
+                state.user.xp -= xpNeeded; 
+                state.user.coins += state.user.level * 50; 
+                showToast(`${t('levelUp')}! ${state.user.level}`); 
+            } 
+            updateUI(); 
+            showToast(`+${amount} XP ${source}`); 
+        }
+        
+        function addCoins(amount) { state.user.coins += amount; updateUI(); }
+        function avgProgress() { return Math.round(state.courses.reduce((a,c)=>a+c.progress,0)/state.courses.length); }
+        
+        // Render Functions
+        function renderPlacements() {
+            return `<div class="section-title"><i class="fas fa-rocket"></i> ${t('liveOpportunities')}</div>
+            <div style="margin-bottom: 20px;"><p>✨ ${t('realTimeJobs')}</p></div>
+            ${liveOpportunities.map(job => `
+                <div class="opportunity-card">
+                    <div style="flex:2">
+                        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:8px;">
+                            <h3 style="color:var(--accent-orange);">${job.title}</h3>
+                            <span style="background:${job.match>=90?'var(--success)':'var(--info)'}; padding:4px 12px; border-radius:20px; font-size:12px;">${job.match}% ${t('match')}</span>
+                        </div>
+                        <p><i class="fas fa-building"></i> ${job.company} · <i class="fas fa-map-marker-alt"></i> ${job.location} · <i class="fas fa-rupee-sign"></i> ${job.salary}</p>
+                        <p style="font-size:13px; margin-top:6px;"><i class="fab fa-${job.platform.toLowerCase()}"></i> ${job.platform} · ${t('posted')}: ${job.posted}</p>
+                    </div>
+                    <div>
+                        <a href="${job.applyUrl}" target="_blank" class="apply-btn"><i class="fas fa-external-link-alt"></i> ${t('directApply')}</a>
+                    </div>
+                </div>
+            `).join('')}
+            <div style="margin-top:20px; text-align:center; font-size:13px; opacity:0.7;">${t('updateResume')}</div>`;
+        }
+        
+        function renderSuggestions() {
+            const suggestions = getSuggestions();
+            return `<div class="section-title"><i class="fas fa-lightbulb"></i> ${t('suggestionsTitle')}</div>
+            <div class="stats-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px,1fr));">
+                ${suggestions.map((s,idx) => `
+                    <div class="suggestion-card" onclick="showToast('${s.text.substring(0,80)}...')">
+                        <div style="font-size:48px; margin-bottom:12px;">${s.icon}</div>
+                        <div style="font-weight:800; margin-bottom:8px;">${s.type === 'ai' ? t('aiRecommendation') : (s.type === 'course' ? '📖 Course Focus' : (s.type === 'streak' ? '🔥 Streak Tip' : '💡 Improvement'))}</div>
+                        <p>${s.text}</p>
+                        <button class="btn" style="margin-top:16px; font-size:13px; padding:8px 16px;" onclick="event.stopPropagation(); showToast('${t('actionPlan')}')">${t('takeAction')}</button>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="job-roles" style="margin-top:20px;">
+                <h3><i class="fas fa-chart-simple"></i> ${t('personalizedPath')}</h3>
+                <p>${t('avgProgress')} (${avgProgress()}%): ${t('weRecommend')} <strong>${state.courses.filter(c=>c.progress<70).map(c=>c.title).join(', ') || t('allOnTrack')}</strong></p>
+                <div class="progress-bar" style="margin-top:16px;"><div class="progress-fill" style="width:${avgProgress()}%"></div></div>
+                <button class="btn" style="margin-top:20px;" onclick="generateAIQuest(state.courses.find(c=>c.progress<70)?.title || 'JavaScript')">${t('generateCustomQuest')}</button>
+            </div>`;
+        }
+        
+        // Core functions
+        function openCourseDetail(courseId) { 
+            const course = courseLibrary[courseId]; 
+            if(!course) return; 
+            const modal = document.getElementById('courseDetailModal'); 
+            const container = document.getElementById('courseModalContent'); 
+            let chaptersHtml = ''; 
+            course.chapters.forEach((ch, idx) => { 
+                chaptersHtml += `<div class="chapter-item ${ch.completed?'completed':''}" onclick="startChapterQuiz(${courseId}, ${idx})"><div><strong>📘 ${ch.title}</strong> ${ch.completed?'✅':''}</div><div>🎯 +${ch.quiz.xp} XP</div></div>`; 
+            }); 
+            container.innerHTML = `<h2>${course.title}</h2><div class="progress-bar"><div class="progress-fill" style="width:${course.progress}%"></div></div>${chaptersHtml}<button class="btn" style="margin-top:16px;" onclick="closeCourseModal()">Close</button>`; 
+            modal.classList.add('show'); 
+        }
+        
+        function startChapterQuiz(courseId, chapterIdx) { 
+            const course = courseLibrary[courseId]; 
+            const chapter = course.chapters[chapterIdx]; 
+            if(chapter.completed){ showToast(t('quizComplete'),'error'); return; } 
+            const quiz = chapter.quiz; 
+            let selected = null; 
+            const modalDiv = document.createElement('div'); 
+            modalDiv.className='modal show'; 
+            modalDiv.innerHTML = `<div class="modal-content"><h3>${chapter.title} Quiz</h3><p>${quiz.question}</p>${quiz.options.map((opt,i)=>`<div class="quiz-option" data-opt="${i}">${opt}</div>`).join('')}<div style="margin-top:20px;"><button class="btn btn-success" id="submitAns">Submit</button> <button class="btn" onclick="this.closest('.modal').remove()">Cancel</button></div></div>`; 
+            document.body.appendChild(modalDiv); 
+            document.querySelectorAll('.quiz-option').forEach(opt=>{ 
+                opt.addEventListener('click',function(){ 
+                    document.querySelectorAll('.quiz-option').forEach(o=>o.classList.remove('selected')); 
+                    this.classList.add('selected'); 
+                    selected = parseInt(this.dataset.opt); 
+                }); 
+            }); 
+            document.getElementById('submitAns').onclick = () => { 
+                if(selected === undefined){ showToast('Select an answer!','error'); return; } 
+                if(selected === quiz.correct){ 
+                    chapter.completed = true; 
+                    let completedCount = course.chapters.filter(ch=>ch.completed).length; 
+                    let newProgress = Math.min(100, Math.floor((completedCount / course.chapters.length) * 100)); 
+                    course.progress = newProgress; 
+                    const courseIndex = state.courses.findIndex(c=>c.id===courseId); 
+                    if(courseIndex !== -1) state.courses[courseIndex].progress = newProgress; 
+                    addXP(quiz.xp, `Quiz: ${chapter.title}`); 
+                    addCoins(15); 
+                    showToast(`${t('correct')} +${quiz.xp} XP!`); 
+                    if(newProgress === 100){ 
+                        addXP(course.xpReward, `Completed ${course.title}`); 
+                        addCoins(100); 
+                        showToast(`🏆 ${t('courseMastered')}!`); 
+                    } 
+                    modalDiv.remove(); 
+                    renderAllPages(); 
+                    closeCourseModal(); 
+                    openCourseDetail(courseId); 
+                } else { 
+                    showToast(`${t('wrong')} ${quiz.options[quiz.correct]}`, 'error'); 
+                    modalDiv.remove(); 
+                } 
+            }; 
+        }
+        
+        function closeCourseModal() { document.getElementById('courseDetailModal').classList.remove('show'); }
+        window.closeCourseModal = closeCourseModal; 
+        window.startChapterQuiz = startChapterQuiz; 
+        window.openCourseDetail = openCourseDetail;
+        
+        // Simplified render functions
+        function renderDashboard() { 
+            const avg = avgProgress(); 
+            const xpNeeded = Math.floor(100 * Math.pow(1.5, state.user.level - 1)); 
+            const xpProgress = (state.user.xp / xpNeeded) * 100; 
+            return `<div class="stats-grid"><div class="stat-card"><div>⭐ Level ${state.user.level}</div><div class="stat-value">${state.user.xp}/${xpNeeded}</div><div class="progress-bar"><div class="progress-fill" style="width:${xpProgress}%"></div></div></div><div class="stat-card"><div>🔥 Streak</div><div class="stat-value">${state.user.streak} days</div></div><div class="stat-card"><div>🪙 Coins</div><div class="stat-value">${state.user.coins}</div></div><div class="stat-card"><div>⚡ Energy</div><div class="stat-value">${state.user.energy}/${state.user.maxEnergy}</div></div></div><div class="section-title"><i class="fas fa-graduation-cap"></i> ${t('continueLearning')}</div><div class="course-grid">${state.courses.map(c=>`<div class="course-card" onclick="openCourseDetail(${c.id})"><div class="course-thumb"><i class="${c.icon}"></i></div><div>${c.title}</div><div class="progress-bar"><div class="progress-fill" style="width:${c.progress}%"></div></div><div>${c.progress}%</div></div>`).join('')}</div><div class="section-title"><i class="fas fa-briefcase"></i> ${t('eligibleJobs')}</div><div class="job-roles"><p>${t('avgProgress')}: ${avg}%</p><div class="role-chips">${state.jobRoles.map(r=>`<div class="role-chip">${r.icon} ${r.name} ${avg>=r.req?'✅':Math.floor((avg/r.req)*100)+'%'}</div>`).join('')}</div></div><div style="display:flex; gap:16px;"><button class="btn" onclick="claimDailyReward()"><i class="fas fa-gift"></i> ${t('claimDaily')}</button><button class="btn btn-success" onclick="openCertModal()"><i class="fas fa-certificate"></i> ${t('requestCert')}</button></div>`; 
+        }
+        
+        function renderCourses() { 
+            return `<div class="section-title"><i class="fas fa-play-circle"></i> ${t('myLearning')}</div><div class="course-grid">${state.courses.map(c=>`<div class="course-card" onclick="openCourseDetail(${c.id})"><div class="course-thumb"><i class="${c.icon}"></i></div><h3>${c.title}</h3><div class="progress-bar"><div class="progress-fill" style="width:${c.progress}%"></div></div><button class="btn" style="margin-top:12px;" onclick="event.stopPropagation();openCourseDetail(${c.id})">Explore</button></div>`).join('')}</div>`; 
+        }
+        
+        function renderQuests() { 
+            return `<div class="section-title"><i class="fas fa-scroll"></i> ${t('activeQuests')}</div>${state.quests.map(q=>`<div class="quest-card" onclick="startQuest(${q.id})"><div><span style="font-size:32px;">${q.icon}</span> <strong>${q.title}</strong><div class="progress-bar" style="width:200px;"><div class="progress-fill" style="width:${(q.progress/q.maxProgress)*100}%"></div></div></div><div>+${q.xpReward} XP</div></div>`).join('')}<div class="section-title">🏆 ${t('completed')}</div><div class="stat-card">✅ ${state.completedQuests} quests</div>`; 
+        }
+        
+        function renderDuel() { 
+            return `<div class="section-title"><i class="fas fa-swords"></i> ${t('duelArena')}</div><div class="stat-card" style="text-align:center;"><div style="font-size:64px;">⚔️</div><button class="btn" style="font-size:18px;" onclick="startDuel()">${t('findMatch')}</button></div>`; 
+        }
+        
+        function renderJobs() { 
+            const avg = avgProgress(); 
+            return `<div class="section-title"><i class="fas fa-briefcase"></i> ${t('jobMatches')}</div><div class="job-roles"><h3>${t('yourSkillMatch')}: ${avg}%</h3><div class="role-chips">${state.jobRoles.map(r=>`<div class="role-chip">${r.icon} ${r.name}</div>`).join('')}</div></div>`; 
+        }
+        
+        function renderAchievements() { 
+            return `<div class="section-title"><i class="fas fa-trophy"></i> ${t('achievements')}</div><div class="badge-grid">${state.badges.map(b=>`<div class="badge ${b.earned?'earned':''}"><div style="font-size:40px;">${b.icon}</div><div>${b.name}</div></div>`).join('')}</div>`; 
+        }
+        
+        function renderCertificates() { 
+            return `<div class="section-title"><i class="fas fa-certificate"></i> ${t('yourCertificates')}</div>${state.certificates.length>0?state.certificates.map(c=>`<div class="quest-card">${c.name} - ${c.learner}</div>`).join(''):`<p>${t('noCerts')}</p>`}<button class="btn btn-success" style="margin-top:20px;" onclick="openCertModal()">+ ${t('requestNew')}</button>`; 
+        }
+        
+        function renderMarketplace() { 
+            const shop = [{name:'Streak Freeze',price:200,icon:'❄️'},{name:'Double XP Token',price:500,icon:'⚡'},{name:'Energy Potion',price:150,icon:'💪'}]; 
+            return `<div class="section-title"><i class="fas fa-store"></i> ${t('marketplace')}</div><div class="marketplace-grid">${shop.map(item=>`<div class="market-item" onclick="purchaseItem('${item.name}',${item.price})"><div style="font-size:44px;">${item.icon}</div><div>${item.name}<br>${item.price}🪙</div><button class="btn">Buy</button></div>`).join('')}</div><div class="section-title">🎒 ${t('yourInventory')}</div><div class="marketplace-grid">${state.inventory.map(item=>`<div class="market-item" onclick="useItem('${item.name}')"><div>${item.icon}</div><div>${item.name} x${item.quantity}</div><button class="btn">Use</button></div>`).join('')}</div>`; 
+        }
+        
+        function renderAnalytics() { 
+            const avg = avgProgress(); 
+            return `<div class="section-title"><i class="fas fa-chart-line"></i> ${t('learningAnalytics')}</div><div class="stats-grid"><div class="stat-card"><div>${t('overallProgress')}</div><div class="stat-value">${avg}%</div></div><div class="stat-card"><div>${t('skillsMastered')}</div><div class="stat-value">${state.courses.filter(c=>c.progress>=100).length}/${state.courses.length}</div></div></div><div class="section-title">📈 ${t('weakAreas')}</div>${state.courses.filter(c=>c.progress<70).map(c=>`<div class="quest-card"><div>${c.title} · ${c.progress}%</div><div class="progress-bar"><div class="progress-fill" style="width:${c.progress}%; background:#ef4444;"></div></div><button class="btn" style="margin-top:12px;" onclick="generateAIQuest('${c.title}')">${t('generateAI')}</button></div>`).join('')}`; 
+        }
+        
+        function renderAllPages() { 
+            document.getElementById('dashboard-page').innerHTML = renderDashboard(); 
+            document.getElementById('courses-page').innerHTML = renderCourses(); 
+            document.getElementById('quests-page').innerHTML = renderQuests(); 
+            document.getElementById('duel-page').innerHTML = renderDuel(); 
+            document.getElementById('jobs-page').innerHTML = renderJobs(); 
+            document.getElementById('placements-page').innerHTML = renderPlacements(); 
+            document.getElementById('suggestions-page').innerHTML = renderSuggestions(); 
+            document.getElementById('achievements-page').innerHTML = renderAchievements(); 
+            document.getElementById('certificates-page').innerHTML = renderCertificates(); 
+            document.getElementById('marketplace-page').innerHTML = renderMarketplace(); 
+            document.getElementById('analytics-page').innerHTML = renderAnalytics(); 
+        }
+        
+        function initNavigation(){ 
+            document.querySelectorAll('.nav-item').forEach(item=>{ 
+                item.addEventListener('click',()=>{ 
+                    document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active')); 
+                    item.classList.add('active'); 
+                    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active-page')); 
+                    document.getElementById(`${item.dataset.page}-page`).classList.add('active-page'); 
+                }); 
+            }); 
+        }
+        
+        function initTheme(){ 
+            document.querySelectorAll('.theme-btn').forEach(btn=>{ 
+                btn.addEventListener('click',()=>{ 
+                    const theme=btn.dataset.theme; 
+                    document.body.className=theme?`theme-${theme}`:''; 
+                    document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active-theme')); 
+                    btn.classList.add('active-theme'); 
+                    localStorage.setItem('skillstack-theme',theme); 
+                }); 
+            }); 
+            const saved=localStorage.getItem('skillstack-theme'); 
+            if(saved){ 
+                document.body.className=saved?`theme-${saved}`:''; 
+                document.querySelector(`[data-theme="${saved}"]`)?.classList.add('active-theme'); 
+            } 
+        }
+        
+        function initLanguage(){ 
+            const savedLang = localStorage.getItem('skillstack-lang') || 'en'; 
+            setLanguage(savedLang); 
+            document.querySelectorAll('.lang-btn').forEach(btn=>{ 
+                btn.addEventListener('click',()=>{ 
+                    setLanguage(btn.dataset.lang); 
+                }); 
+            }); 
+        }
+        
+        // Game action functions
+        window.startQuest = (id) => { 
+            const q = state.quests.find(q=>q.id===id); 
+            if(state.user.energy>=q.difficulty){ 
+                state.user.energy-=q.difficulty; 
+                q.progress++; 
+                if(q.progress>=q.maxProgress){ 
+                    addXP(q.xpReward,q.title); 
+                    addCoins(q.coinReward); 
+                    state.completedQuests++; 
+                    if(q.type==='boss'){ 
+                        state.bossDefeated++; 
+                        const badge=state.badges.find(b=>b.id===3); 
+                        if(badge)badge.earned=true; 
+                    } 
+                    q.progress=0; 
+                    showToast(`✅ ${t('completed')}: ${q.title}!`); 
+                } 
+                renderAllPages(); 
+                updateUI(); 
+            } else showToast('Not enough energy!','error'); 
+        };
+        
+        window.startDuel = () => { 
+            let score=0, current=0; 
+            const qs=[{text:'What does HTML stand for?',options:['Hyper Text Markup Language','High Tech Modern Language','Hyper Transfer Markup Language','Home Tool Markup Language'],correct:0},{text:'Which is a JavaScript framework?',options:['Django','React','Laravel','Flask'],correct:1},{text:'What is 2 + 2 * 2?',options:['6','8','4','10'],correct:0}]; 
+            function showQ(){ 
+                const q=qs[current]; 
+                const m=document.createElement('div'); 
+                m.className='modal show'; 
+                m.innerHTML=`<div class="modal-content"><h2>⚔️ Duel</h2><div>${q.text}</div>${q.options.map((opt,i)=>`<div style="padding:12px; margin:8px 0; background:var(--card-bg); border-radius:16px; cursor:pointer;" onclick="answerDuel(${i},${q.correct})">${opt}</div>`).join('')}</div>`; 
+                document.body.appendChild(m); 
+            } 
+            window.answerDuel=(ans,cor)=>{ 
+                if(ans===cor)score++; 
+                current++; 
+                document.querySelector('.modal').remove(); 
+                if(current<qs.length) showQ(); 
+                else{ 
+                    const xp=50+score*15; 
+                    addXP(xp,'Duel'); 
+                    addCoins(25+score*10); 
+                    showToast(`${t('duelComplete')} +${xp} XP!`); 
+                } 
+            }; 
+            showQ(); 
+        };
+        
+        window.purchaseItem = (name,price)=>{ 
+            if(state.user.coins>=price){ 
+                state.user.coins-=price; 
+                const item=state.inventory.find(i=>i.name===name); 
+                if(item) item.quantity++; 
+                else state.inventory.push({name,quantity:1,icon:'📦'}); 
+                showToast(`✅ ${name} purchased!`); 
+                renderAllPages(); 
+                updateUI(); 
+            } else showToast('Not enough coins!','error'); 
+        };
+        
+        window.useItem = (name)=>{ 
+            const item=state.inventory.find(i=>i.name===name); 
+            if(item&&item.quantity>0){ 
+                item.quantity--; 
+                if(name==='Energy Potion'){ 
+                    state.user.energy=Math.min(state.user.maxEnergy,state.user.energy+5); 
+                    showToast(t('energyRestored')); 
+                } else if(name==='Streak Freeze') showToast(t('streakActive')); 
+                renderAllPages(); 
+                updateUI(); 
+            } 
+        };
+        
+        window.claimDailyReward = ()=>{ 
+            addXP(50,t('dailyReward')); 
+            addCoins(25); 
+            state.user.streak++; 
+            showToast(`${t('dailyReward')} ${state.user.streak} days!`); 
+            renderAllPages(); 
+            updateUI(); 
+        };
+        
+        window.generateAIQuest = (topic)=>{ 
+            showToast(t('aiQuest')); 
+            setTimeout(()=>{ 
+                state.quests.push({ id:Date.now(), title:`AI Quest: ${topic}`, type:'ai', xpReward:150, coinReward:75, difficulty:3, progress:0, maxProgress:4, icon:'🤖' }); 
+                renderAllPages(); 
+                showToast(t('newAIQuest')); 
+            },1000); 
+        };
+        
+        window.openCertModal = ()=>{ 
+            document.getElementById('certModal').classList.add('show'); 
+            document.getElementById('certNameInput').addEventListener('input',(e)=>{ 
+                document.getElementById('previewName').textContent=e.target.value||'Learner'; 
+            }); 
+        };
+        
+        window.closeCertModal = ()=>{ document.getElementById('certModal').classList.remove('show'); };
+        
+        window.generateCertificate = ()=>{ 
+            const name=document.getElementById('certNameInput').value||'Learner'; 
+            const course=document.getElementById('certCourseSelect').value; 
+            state.certificates.push({ name:course, learner:name, date:new Date().toLocaleDateString() }); 
+            closeCertModal(); 
+            showToast(t('certificateGen')); 
+            renderAllPages(); 
+        };
+        
+        window.handleSearch = ()=>{ showToast(`${t('searchDemo')} "${document.getElementById('searchInput').value}"`); };
+        
+        // Initialize
+        renderAllPages(); 
+        initNavigation(); 
+        initTheme(); 
+        initLanguage(); 
+        updateUI();
+        
+        setInterval(()=>{ 
+            if(state.user.energy<state.user.maxEnergy){ 
+                state.user.energy++; 
+                updateUI(); 
+            } 
+        },60000);
+    </script>
+</body>
+</html>
