@@ -1,35 +1,37 @@
 {
-  "name": "skillsetpromax-backend",
-  "version": "1.0.0",
-  "description": "Backend for SkillSetProMax – Gamified LMS",
-  "type": "module",
-  "main": "dist/index.js",
+  "name": "@pinojs/redact",
+  "version": "0.4.0",
+  "description": "Redact JS objects",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "build": "tsc --outDir dist",
-    "start": "node dist/index.js"
+    "test": "node --test && npm run test:types",
+    "test:integration": "node --test test/integration.test.js",
+    "test:types": "tsd",
+    "test:all": "node --test test/*.test.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "bench": "node benchmarks/basic.js"
   },
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "pino": "^9.7.0",
-    "pino-http": "^10.5.0",
-    "uuid": "^11.1.0",
-    "zod": "^3.25.0"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pinojs/redact.git"
   },
+  "keywords": [
+    "redact"
+  ],
+  "author": "Matteo Collina <hello@matteocollina.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pinojs/redact/issues"
+  },
+  "homepage": "https://github.com/pinojs/redact#readme",
   "devDependencies": {
-    "@types/bcryptjs": "^2.4.6",
-    "@types/cookie-parser": "^1.4.9",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.3",
-    "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^24.0.0",
-    "@types/uuid": "^10.0.0",
-    "tsx": "^4.19.4",
+    "eslint": "^9.36.0",
+    "fast-redact": "^3.5.0",
+    "mitata": "^1.0.34",
+    "neostandard": "^0.12.2",
+    "tsd": "^0.33.0",
     "typescript": "^5.9.2"
   }
 }
